@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import ProductDetails from './ProductDetails';
 export default function Products() {
   const [products, setProducts] = useState([]);
   const Products = [
@@ -22,9 +22,7 @@ export default function Products() {
       <ul>
         {products.map((product) => (
           <li key={product.id}>
-            <h2>{product.title}</h2>
-            <p>{product.description}</p>
-            <p>Price: ${product.price.toFixed(2)}</p>
+           <ProductDetails product={product} />
           </li>
         ))}
       </ul>
