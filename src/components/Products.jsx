@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductDetails from './ProductDetails';
-export default function Products() {
+export default function Products({cartItems,setCartItems}) {
   const [products, setProducts] = useState([]);
   const Products = [
     { id: 1, name: 'Product 1', price: 19.99 },
@@ -22,7 +22,7 @@ export default function Products() {
       <ul>
         {products.map((product) => (
           <li key={product.id}>
-           <ProductDetails product={product} />
+           <ProductDetails product={product} cartItems={cartItems} setCartItems={setCartItems} />
           </li>
         ))}
       </ul>

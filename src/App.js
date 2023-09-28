@@ -9,14 +9,14 @@ import Cart from './components/Cart'
 import UserList from './components/Userlist'
 
 const App = () => {
- 
+  const [cartItems, setCartItems] = useState([]);
       return (
     <>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Products />} />
+        <Route path="/" element={<Products cartItems={cartItems} setCartItems={setCartItems} />} />
         <Route path='/products/:id' element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
         <Route path="/userlist" element={<UserList />} />
       </Routes>
     </>
