@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export default function Login() {
   // State variables to hold user input
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   // Function to handle form submission
   const handleSubmit = (e) => {
@@ -11,10 +11,10 @@ export default function Login() {
 
     // Perform authentication here (you would typically send a request to a server)
     // For this example, let's assume successful login if username and password are both "admin"
-    if (username === 'admin' && password === 'admin') {
-      alert('Login successful!');
+    if (username === "admin" && password === "admin") {
+      alert("Login successful!");
     } else {
-      alert('Login failed. Please check your username and password.');
+      alert("Login failed. Please check your username and password.");
     }
   };
 

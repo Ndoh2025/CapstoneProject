@@ -1,8 +1,8 @@
 // Home.jsx
-import React from 'react';
-import { Link } from 'react-router-dom'; 
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Navbar= () => {
+const Navbar = () => {
   return (
     <div>
       <h1>Welcome to the Capstone eCommerce Store</h1>
@@ -16,11 +16,9 @@ const Navbar= () => {
         <li>
           <Link to="/">Home</Link>
         </li>
-    
       </ul>
     </div>
   );
 };
 
 export default Navbar;
-

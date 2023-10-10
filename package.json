@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "client:dev": "react-scripts start",
-    "client:build": "react-scripts build"
+    "client:build": "react-scripts build",
+    "format": "prettier --write --ignore-unknown"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "prettier": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
