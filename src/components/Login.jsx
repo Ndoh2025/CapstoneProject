@@ -1,51 +1,63 @@
 import React, { useState } from "react";
 
-export default function Login() {
-  // State variables to hold user input
+const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [cart, setCart] = useState(null);
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("https://fakestoreapi.com/users");
+      const users = await response.json();
 
-    // Perform authentication here (you would typically send a request to a server)
-    // For this example, let's assume successful login if username and password are both "admin"
-    if (username === "admin" && password === "admin") {
-      alert("Login successful!");
-    } else {
-      alert("Login failed. Please check your username and password.");
+      const user = users.find(
+        (u) => u.username === username && u.password === password,
+      );
+
+      if (user) {
+        setCart(user.cart);
+        // Redirect the user on successful login
+        // we'll just display a success message here.
+        alert("Login successful! Redirecting...");
+      } else {
+        setError("Invalid username or password");
+      }
+    } catch (error) {
+      setError("An error occurred while logging in");
     }
   };
 
   return (
-    <div className="login-container">
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+    <div>
+      <h2>Login</h2>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button onClick={handleLogin}>Login</button>
+
+      {cart && (
+        <div>
+          <h3>Your Cart</h3>
+          <ul>
+            {cart.map((item) => (
+              <li key={item.id}>{item.title}</li>
+            ))}
+          </ul>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <button type="submit">Login</button>
-        </div>
-      </form>
+      )}
     </div>
   );
-}
+};
+
+export default Login;
