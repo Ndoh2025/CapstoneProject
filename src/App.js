@@ -11,11 +11,11 @@ import Profile from "./components/Profile";
 import Checkout from "./components/Checkout";
 
 export default function App() {
-  // it would be a good idea to add your auth token to your state HERE - that way you can pass it as props to all child components 
+  // it would be a good idea to add your auth token to your state HERE - that way you can pass it as props to all child components
   const [cart, setCart] = useState([]);
   const [cartVisible, setCartVisible] = useState(false);
   // in order to get information for the user, you need to send a GET request - https://fakestoreapi.com/docs#u-single
-  // See the ReadME. for notes on how you can retrieve a specific user ID. 
+  // See the ReadME. for notes on how you can retrieve a specific user ID.
   const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
@@ -80,7 +80,10 @@ export default function App() {
               <AllProducts handleAddToCart={handleAddToCart} user={user} />
             }
           />
-          <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route
+            path="/login"
+            element={<Login setUser={setUser} setCart={setCart} />}
+          />
           <Route
             path="/cart"
             element={
