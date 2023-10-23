@@ -23,7 +23,6 @@ export default function App() {
   const handleLogout = () => {
     setUser(null);
   };
-
   const toggleCart = () => {
     setCartVisible(!cartVisible);
   };
@@ -59,6 +58,7 @@ export default function App() {
           <i className="fa fa-shopping-cart" aria-hidden="true"></i>
         </Link>
         {cartVisible && (
+          
           <Cart
             cart={cart}
             handleRemoveFromCart={handleRemoveFromCart}
