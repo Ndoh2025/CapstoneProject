@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-const Login = ({ setUser, setCart }) => {
+const Login = ({ setUser, setCart, cart }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
+  console.log(cart);
   const handleLogin = async () => {
     try {
       const response = await fetch("https://fakestoreapi.com/users");
@@ -16,7 +16,7 @@ const Login = ({ setUser, setCart }) => {
       setUser(user);
 
       if (user) {
-        setCart(user.cart);
+        setCart(user?.cart ? user.cart : []);
         // Redirect the user on successful login
         // we'll just display a success message here.
         alert("Login successful! Redirecting...");

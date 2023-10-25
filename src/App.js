@@ -17,7 +17,7 @@ export default function App() {
   // in order to get information for the user, you need to send a GET request - https://fakestoreapi.com/docs#u-single
   // See the ReadME. for notes on how you can retrieve a specific user ID.
   const [user, setUser] = useState(null);
-
+  console.log(cart);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -82,7 +82,7 @@ export default function App() {
           />
           <Route
             path="/login"
-            element={<Login setUser={setUser} setCart={setCart} />}
+            element={<Login setUser={setUser} setCart={setCart} cart={cart} />}
           />
           <Route
             path="/cart"
