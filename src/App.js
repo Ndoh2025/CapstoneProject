@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CartProvider } from "./context/Cart";
 import { Routes, Route, Link, useNavigate, Navigate } from "react-router-dom";
 import AllProducts from "./components/AllProducts";
 import "./App.css";
@@ -74,46 +75,37 @@ export default function App() {
 
       {/*Routing paths*/}
       <div id="main-section">
-        <Routes>
-          <Route
-            path="/"
-            element={<AllProducts handleAddToCart={handleAddToCart} />}
-          />
-          <Route
-            path="/"
-            element={
-              <AllProducts handleAddToCart={handleAddToCart} user={user} />
-            }
-          />
-          <Route
-            path="/login"
-            element={<Login setUser={setUser} setCart={setCart} cart={cart} />}
-          />
-          <Route
-            path="/cart"
-            element={
-              <Cart
-                cart={cart}
-                handleRemoveFromCart={handleRemoveFromCart}
-                totalValue={totalValue}
-                user={user}
-              />
-            }
-          />
-          <Route path="/sorting" element={<Sorting />} />
-          <Route path="/filter" element={<Filter />} />
-          <Route path="/usersCart" element={<UsersCart />} />
-          <Route
-            path="/profile"
-            element={user ? <Profile user={user} /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/checkout"
-            element={<Checkout cart={cart} totalValue={totalValue} />}
-          />
-          <Route path="/shipping" element={<Shipping />} />
-          <Route path="/payment" element={<Payment />} />
-        </Routes>
+        <CartProvider>
+          <Routes>
+            <Route
+              path="/"
+              element={<AllProducts handleAddToCart={handleAddToCart} />}
+            />
+
+            <Route
+              path="/login"
+              element={
+                <Login setUser={setUser} setCart={setCart} cart={cart} />
+              }
+            />
+            <Route path="/cart" element={<Cart cart={cart} user={user} />} />
+            <Route path="/sorting" element={<Sorting />} />
+            <Route path="/filter" element={<Filter />} />
+            <Route path="/usersCart" element={<UsersCart />} />
+            <Route
+              path="/profile"
+              element={
+                user ? <Profile user={user} /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              path="/checkout"
+              element={<Checkout cart={cart} totalValue={totalValue} />}
+            />
+            <Route path="/shipping" element={<Shipping />} />
+            <Route path="/payment" element={<Payment />} />
+          </Routes>
+        </CartProvider>
       </div>
     </>
   );

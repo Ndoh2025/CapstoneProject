@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/Cart";
 
-function Cart({ setCartItems }) {
+function Cart({}) {
   const [cart, setCart] = useState(null);
   const [itemQuantities, setItemQuantities] = useState({});
 
+  const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } =
+    useContext(CartContext);
   useEffect(() => {
     const fetchCart = async () => {
       try {
@@ -15,8 +17,6 @@ function Cart({ setCartItems }) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setCart(data);
-        setCartItems([...cartItems, ...cart?.products]);
       } catch (error) {
         console.log(error);
       }
@@ -37,7 +37,7 @@ function Cart({ setCartItems }) {
 
   useEffect(() => {
     //object with initial quantities based on the items in the cart
-    const initialQuantities = cart.reduce((quantities, item) => {
+    const initialQuantities = cartItems.reduce((quantities, item) => {
       quantities[item.id] = 1;
       return quantities;
     }, {});
@@ -48,8 +48,7 @@ function Cart({ setCartItems }) {
   //Add to cart
   //Remove from cart
   //cart items + total amount
-  const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } =
-    useContext(CartContext);
+
   return (
     // <div className="cart-container">
     //   <h2>Shopping Cart</h2>
@@ -64,7 +63,7 @@ function Cart({ setCartItems }) {
           <div className="flex justify-between items-center" key={item.id}>
             <div className="flex gap-4">
               <img
-                src={item.thumbnail}
+                src={item.image}
                 alt={item.title}
                 className="rounded-md h-24"
               />
