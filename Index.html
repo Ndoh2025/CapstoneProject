@@ -4,13 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <link rel="stylesheet" type="text/css" href="styles.css">
+   
 
     <title>Online Store</title>
   </head>
   <body>
+    <div class="cart">
+      <!-- Cart items will be added dynamically here -->
+      <div class="grand-total">Grand Total: $0</div>
+      <button class="purchase-btn" onclick="purchase()">Purchase</button>
+    </div>
+    <div class="products">
     <div id="root"></div>
     <div id="all-products-container"></div>
     <div id="login-form"></div>

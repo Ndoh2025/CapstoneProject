@@ -9,6 +9,9 @@ import Sorting from "./components/Sorting";
 import Filter from "./components/Filter";
 import Profile from "./components/Profile";
 import Checkout from "./components/Checkout";
+import UsersCart from "./components/UsersCart";
+import Payment from "./components/Payment";
+import Shipping from "./components/Shipping";
 
 export default function App() {
   // it would be a good idea to add your auth token to your state HERE - that way you can pass it as props to all child components
@@ -50,14 +53,16 @@ export default function App() {
 
       <h1 id="capstone">Capstone e-Commerce Store</h1>
 
-      {/* Nav Bar */}
       <div className="navbar">
-        {/* Drop downmenu for home and login */}
         <DropdownMenu user={user} handleLogout={handleLogout} />
         {/* Cart icon */}
         <Link to="/cart" className="cart-icon">
           <i className="fa fa-shopping-cart" aria-hidden="true"></i>
         </Link>
+        <li>
+          <Link to="/usersCart">My Cart</Link>
+        </li>
+
         {cartVisible && (
           <Cart
             cart={cart}
@@ -97,6 +102,7 @@ export default function App() {
           />
           <Route path="/sorting" element={<Sorting />} />
           <Route path="/filter" element={<Filter />} />
+          <Route path="/usersCart" element={<UsersCart />} />
           <Route
             path="/profile"
             element={user ? <Profile user={user} /> : <Navigate to="/login" />}
@@ -105,6 +111,8 @@ export default function App() {
             path="/checkout"
             element={<Checkout cart={cart} totalValue={totalValue} />}
           />
+          <Route path="/shipping" element={<Shipping />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
       </div>
     </>
