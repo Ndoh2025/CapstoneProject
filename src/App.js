@@ -91,7 +91,10 @@ export default function App() {
             <Route path="/cart" element={<Cart cart={cart} user={user} />} />
             <Route path="/sorting" element={<Sorting />} />
             <Route path="/filter" element={<Filter />} />
-            <Route path="/usersCart" element={<UsersCart />} />
+            <Route
+              path="/usersCart"
+              element={<UsersCart cart={cart} setCart={setCart} user={user} />}
+            />
             <Route
               path="/profile"
               element={

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ setUser, setCart, cart }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   console.log(cart);
   const handleLogin = async () => {
     try {
@@ -20,6 +22,7 @@ const Login = ({ setUser, setCart, cart }) => {
         // Redirect the user on successful login
         // we'll just display a success message here.
         alert("Login successful! Redirecting...");
+        navigate("/");
       } else {
         setError("Invalid username or password");
       }

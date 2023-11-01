@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = ({ cart, totalValue }) => {
   const [formData, setFormData] = useState({
@@ -23,6 +24,8 @@ const Checkout = ({ cart, totalValue }) => {
     zipCode: "",
   });
 
+  const navigate = useNavigate();
+
   const handlePaymentInputChange = (e) => {
     const { name, value } = e.target;
     setPaymentData({
@@ -43,6 +46,8 @@ const Checkout = ({ cart, totalValue }) => {
     e.preventDefault();
     console.log("Form Data:", formData);
     console.log("Shipping Data: ", shippingData);
+    alert("Thank you for shopping!");
+    navigate("/");
   };
 
   return (

@@ -7,8 +7,13 @@ import { useNavigate } from "react-router-dom";
 //   saveCartToLocalStorage,
 // } from "../Context/Cart";
 
-export default function UsersCart() {
-  const [cart, setCart] = useState([]);
+const getCartFromLocalStorage = () => {
+  const cartData = localStorage.getItem("cart");
+  return JSON.parse(cartData);
+};
+
+export default function UsersCart({ cart, setCart, user }) {
+  // const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [username, setUsername] = useState("");
   const [userTotalPrice, setTotalPrice] = useState(0);
@@ -16,13 +21,13 @@ export default function UsersCart() {
   const [mySingleCart, setSingleCart] = useState([]);
 
   //local storage
-  useEffect(() => {
-    const usernameFromLocalStorage = localStorage.getItem("username");
-    setUsername(usernameFromLocalStorage);
+  // useEffect(() => {
+  //   const usernameFromLocalStorage = localStorage.getItem("username");
+  //   setUsername(usernameFromLocalStorage);
 
-    const cartData = getCartFromLocalStorage("cart");
-    setCart(cartData);
-  }, []);
+  //   const cartData = getCartFromLocalStorage("cart");
+  //   setCart(cartData);
+  // }, []);
 
   // increase and decrease
   function increaseQuantity() {
@@ -34,75 +39,75 @@ export default function UsersCart() {
   }
 
   //fetch cart
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const myStoredCartUserId = localStorage.getItem("cartUserId");
-        const myCart = await singleCart(myStoredCartUserId);
-        console.log("Cart Data:", myCart);
+  // useEffect(() => {
+  //   const fetchCart = async () => {
+  //     try {
+  //       const myStoredCartUserId = localStorage.getItem("cartUserId");
+  //       const myCart = await singleCart(myStoredCartUserId);
+  //       console.log("Cart Data:", myCart);
 
-        setCart(myCart);
-        saveCartToLocalStorage(myCart);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
+  //       setCart(myCart);
+  //       saveCartToLocalStorage(myCart);
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   };
 
-    fetchCart();
-  }, []);
+  //   fetchCart();
+  // }, []);
 
   //all users
-  useEffect(() => {
-    const fetchAllUsers = async () => {
-      try {
-        const allUsers = await getAllUsers();
+  // useEffect(() => {
+  //   const fetchAllUsers = async () => {
+  //     try {
+  //       const allUsers = await getAllUsers();
 
-        const loggedInUser = allUsers.find(
-          (user) => user.username === username,
-        );
+  //       const loggedInUser = allUsers.find(
+  //         (user) => user.username === username,
+  //       );
 
-        if (loggedInUser) {
-          localStorage.setItem("cartUserId", loggedInUser.id);
-          console.log("All Users", allUsers);
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-    fetchAllUsers();
-  }, [username]);
+  //       if (loggedInUser) {
+  //         localStorage.setItem("cartUserId", loggedInUser.id);
+  //         console.log("All Users", allUsers);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   };
+  //   fetchAllUsers();
+  // }, [username]);
 
   //fetch cart products
-  useEffect(() => {
-    const fetchCartProducts = async () => {
-      let productList = [];
+  // useEffect(() => {
+  //   const fetchCartProducts = async () => {
+  //     let productList = [];
 
-      for (const product of cart.products || []) {
-        const details = await getSingleProduct(product.productId);
-        productList.push({ ...details, quantity: product.quantity });
-      }
+  //     for (const product of cart.products || []) {
+  //       const details = await getSingleProduct(product.productId);
+  //       productList.push({ ...details, quantity: product.quantity });
+  //     }
 
-      setProducts(productList);
-    };
+  //     setProducts(productList);
+  //   };
 
-    fetchCartProducts();
-  }, [cart]);
+  //   fetchCartProducts();
+  // }, [cart]);
 
-  //single cart for user
-  useEffect(() => {
-    const fetchSingleCart = async () => {
-      try {
-        const mySingleCart = await singleCart(
-          localStorage.getItem("cartUserId"),
-        );
-        setSingleCart(mySingleCart);
-      } catch (error) {
-        console.error("Error", error);
-      }
-    };
+  // //single cart for user
+  // useEffect(() => {
+  //   const fetchSingleCart = async () => {
+  //     try {
+  //       const mySingleCart = await singleCart(
+  //         localStorage.getItem("cartUserId"),
+  //       );
+  //       setSingleCart(mySingleCart);
+  //     } catch (error) {
+  //       console.error("Error", error);
+  //     }
+  //   };
 
-    fetchSingleCart();
-  }, []);
+  //   fetchSingleCart();
+  // }, []);
 
   //total price
   useEffect(() => {
@@ -147,11 +152,11 @@ export default function UsersCart() {
   function backToProducts() {
     navigate("/main-all-products");
   }
-
+  console.log(user);
   return (
     <>
       <div className="second-cart-container">
-        <h6>{`${username}'s Cart`}</h6>
+        <h6>{`${user}'s Cart`}</h6>
 
         {products.length === 0 ? (
           <>

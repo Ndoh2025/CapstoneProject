@@ -40,7 +40,7 @@ export default function AllProducts({ handleAddToCart, user }) {
   // Toggle product description visibility
   const toggleDescription = (productId) => {
     setSelectedDescription(
-      selectedDescription === productId ? null : productId
+      selectedDescription === productId ? null : productId,
     );
   };
 
@@ -120,7 +120,7 @@ export default function AllProducts({ handleAddToCart, user }) {
                       <p className="product-description">
                         {filteredProduct.description}
                       </p>
-                    }
+                    )}
                     <div className="mt-6 flex justify-between items-center">
                       <button
                         className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover-bg-gray-700 focus:outline-none focus-bg-gray-700"
@@ -133,7 +133,7 @@ export default function AllProducts({ handleAddToCart, user }) {
                     </div>
                   </div>
                 ))
-              }
+              )}
             </div>
             <Cart showModal={showModal} toggle={toggle} />
           </div>
@@ -142,12 +142,3 @@ export default function AllProducts({ handleAddToCart, user }) {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
